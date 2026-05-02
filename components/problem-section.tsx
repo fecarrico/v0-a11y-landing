@@ -56,7 +56,7 @@ export function ProblemSection() {
               className="p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-colors"
             >
               <div className="w-12 h-12 rounded-lg bg-destructive/10 flex items-center justify-center mb-4">
-                <problem.icon className="w-6 h-6 text-destructive" />
+                <problem.icon className="w-6 h-6 text-destructive" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 {problem.title}

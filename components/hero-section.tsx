@@ -141,7 +141,7 @@ export function HeroSection() {
         transition={{ duration: 1, delay: 0.8 }}
         className="absolute bottom-8 right-8"
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-primary" aria-hidden="true" focusable="false">
           <path d="M12 2L13.5 8.5H20L14.5 12.5L16 19L12 15L8 19L9.5 12.5L4 8.5H10.5L12 2Z" fill="currentColor" />
         </svg>
       </motion.div>

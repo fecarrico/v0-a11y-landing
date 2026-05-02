@@ -61,7 +61,7 @@ export function ParadigmSection() {
               className="relative p-8 rounded-xl border border-border bg-background hover:border-primary/50 transition-all group"
             >
               <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <pillar.icon className="w-7 h-7 text-primary" />
+                <pillar.icon className="w-7 h-7 text-primary" aria-hidden="true" />
               </div>
               <h3 className="text-2xl font-bold text-primary mb-1 font-mono">
                 {pillar.title}

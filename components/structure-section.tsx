@@ -68,7 +68,7 @@ export function StructureSection() {
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <section.icon className="w-6 h-6 text-primary" />
+                  <section.icon className="w-6 h-6 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">

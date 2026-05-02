@@ -49,12 +49,13 @@ export function Footer() {
               </Link>
             </p>
 
-            <div className="flex items-center gap-3">
+            {/* A11Y: Social links with 44x44px minimum touch target */}
+            <div className="flex items-center gap-1">
               <Link
                 href="https://github.com/fecarrico/A11Y.md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
                 aria-label={t("footer.aria.github")}
               >
                 <Github className="w-5 h-5" />
@@ -63,7 +64,7 @@ export function Footer() {
                 href="https://www.linkedin.com/in/fecarrico/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
                 aria-label={t("footer.aria.linkedin")}
               >
                 <Linkedin className="w-5 h-5" />
@@ -72,7 +73,7 @@ export function Footer() {
                 href="https://carrico.medium.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
                 aria-label={t("footer.aria.medium")}
               >
                 <MediumIcon className="w-5 h-5" />

@@ -135,6 +135,9 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.aria.github": "GitHub",
     "footer.aria.linkedin": "LinkedIn",
     "footer.aria.medium": "Medium",
+    
+    // A11Y
+    "a11y.skipToContent": "Pular para o conteúdo principal",
   },
 
   en: {
@@ -259,12 +262,16 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.aria.github": "GitHub",
     "footer.aria.linkedin": "LinkedIn",
     "footer.aria.medium": "Medium",
+    
+    // A11Y
+    "a11y.skipToContent": "Skip to main content",
   },
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Language>("pt")
   const [resolved, setResolved] = useState(false)
+  const [announcement, setAnnouncement] = useState("")
 
   useEffect(() => {
     const browserLang = navigator.language?.toLowerCase() ?? ""
@@ -273,7 +280,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setResolved(true)
   }, [])
 
-  const setLang = (l: Language) => setLangState(l)
+  // A11Y: Update HTML lang attribute when language changes
+  useEffect(() => {
+    if (resolved) {
+      document.documentElement.lang = lang === "pt" ? "pt-BR" : "en"
+    }
+  }, [lang, resolved])
+
+  const setLang = (l: Language) => {
+    setLangState(l)
+    // A11Y: Announce language change to screen readers
+    setAnnouncement(l === "pt" ? "Idioma alterado para Português" : "Language changed to English")
+    setTimeout(() => setAnnouncement(""), 1000)
+  }
 
   const t = (key: string) => translations[lang][key] ?? key
 
@@ -282,6 +301,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
       {children}
+      {/* A11Y: Live region for dynamic feedback */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {announcement}
+      </div>
     </LanguageContext.Provider>
   )
 }

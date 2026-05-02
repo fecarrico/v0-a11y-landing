@@ -64,7 +64,7 @@ export function HowToUseSection() {
               >
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <step.icon className="w-6 h-6 text-primary" />
+                    <step.icon className="w-6 h-6 text-primary" aria-hidden="true" />
                   </div>
                 </div>
                 <div>

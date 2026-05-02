@@ -26,15 +26,21 @@ export function Header() {
   ]
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border"
-          : "bg-transparent"
-      )}
-    >
-      <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <>
+      {/* A11Y: Skip to main content link */}
+      <a href="#main-content" className="skip-link">
+        {t("a11y.skipToContent")}
+      </a>
+      
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-background/80 backdrop-blur-lg border-b border-border"
+            : "bg-transparent"
+        )}
+      >
+        <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between" aria-label="Principal">
         {/* Logo */}
         <Link
           href="/"
@@ -89,10 +95,11 @@ export function Header() {
             {lang === "pt" ? "EN" : "PT"}
           </button>
           <button
-            className="p-2 text-foreground"
+            className="p-2 text-foreground min-w-[44px] min-h-[44px] flex items-center justify-center"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-label={isMobileMenuOpen ? (lang === "pt" ? "Fechar menu" : "Close menu") : (lang === "pt" ? "Abrir menu" : "Open menu")}
             aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -101,7 +108,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-b border-border">
+        <div id="mobile-menu" className="md:hidden bg-background border-b border-border">
           <div className="px-4 py-4 space-y-4">
             {navLinks.map((link) => (
               <Link
@@ -129,6 +136,7 @@ export function Header() {
           </div>
         </div>
       )}
-    </header>
+      </header>
+    </>
   )
 }
