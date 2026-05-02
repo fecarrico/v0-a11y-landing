@@ -10,17 +10,26 @@ interface AnimatedSpanProps extends MotionProps {
   className?: string
 }
 
-export const AnimatedSpan = ({ children, delay = 0, className, ...props }: AnimatedSpanProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: -5 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3, delay: delay / 1000 }}
-    className={cn("grid text-sm font-normal tracking-tight", className)}
-    {...props}
-  >
-    {children}
-  </motion.div>
-)
+export const AnimatedSpan = ({ children, delay = 0, className, ...props }: AnimatedSpanProps) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -5 }}
+      animate={isMounted ? { opacity: 1, y: 0 } : { opacity: 0, y: -5 }}
+      transition={{ duration: 0.3, delay: delay / 1000 }}
+      className={cn("grid text-sm font-normal tracking-tight", className)}
+      suppressHydrationWarning
+      {...props}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 interface TypingAnimationProps extends MotionProps {
   children: string
@@ -48,14 +57,20 @@ export const TypingAnimation = ({
 
   const [displayedText, setDisplayedText] = useState<string>("")
   const [started, setStarted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const elementRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
     const startTimeout = setTimeout(() => {
       setStarted(true)
     }, delay)
     return () => clearTimeout(startTimeout)
-  }, [delay])
+  }, [delay, isMounted])
 
   useEffect(() => {
     if (!started) return
@@ -76,7 +91,12 @@ export const TypingAnimation = ({
   }, [children, duration, started])
 
   return (
-    <MotionComponent ref={elementRef} className={cn("text-sm font-normal tracking-tight", className)} {...props}>
+    <MotionComponent 
+      ref={elementRef} 
+      className={cn("text-sm font-normal tracking-tight", className)} 
+      suppressHydrationWarning
+      {...props}
+    >
       {displayedText}
     </MotionComponent>
   )
@@ -88,6 +108,34 @@ interface TerminalProps {
 }
 
 export const Terminal = ({ children, className }: TerminalProps) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return (
+      <div
+        className={cn(
+          "z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background",
+          className,
+        )}
+      >
+        <div className="flex flex-col gap-y-2 border-b border-border p-4">
+          <div className="flex flex-row gap-x-2">
+            <div className="h-2 w-2 rounded-full bg-red-500"></div>
+            <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
+            <div className="h-2 w-2 rounded-full bg-green-500"></div>
+          </div>
+        </div>
+        <pre className="p-4">
+          <code className="grid gap-y-1 overflow-auto"></code>
+        </pre>
+      </div>
+    )
+  }
+
   return (
     <div
       className={cn(
