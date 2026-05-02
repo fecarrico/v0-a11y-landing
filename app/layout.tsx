@@ -1,15 +1,35 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, VT323 } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const geist = Geist({ 
+  subsets: ["latin"],
+  variable: "--font-geist-sans"
+});
+
+const geistMono = Geist_Mono({ 
+  subsets: ["latin"],
+  variable: "--font-geist-mono"
+});
+
+const vt323 = VT323({ 
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pixel"
+});
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'A11Y.md - Sistema de Contexto Persistente para Acessibilidade',
+  description: 'Um sistema de contexto para construir software acessível por padrão — para desenvolvedores e IA, com regras aplicáveis alinhadas ao WCAG.',
   generator: 'v0.app',
+  keywords: ['acessibilidade', 'WCAG', 'IA', 'desenvolvimento web', 'a11y', 'inclusão digital'],
+  authors: [{ name: 'Felipe A. Carriço' }],
+  openGraph: {
+    title: 'A11Y.md - Sistema de Contexto Persistente para Acessibilidade',
+    description: 'Um sistema de contexto para construir software acessível por padrão — para desenvolvedores e IA.',
+    type: 'website',
+  },
   icons: {
     icon: [
       {
@@ -35,8 +55,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">
+    <html lang="pt-BR" className="bg-background">
+      <body className={`${geist.variable} ${geistMono.variable} ${vt323.variable} font-sans antialiased`}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
