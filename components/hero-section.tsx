@@ -95,14 +95,14 @@ export function HeroSection() {
             asChild
             variant="outline"
             size="lg"
-            className="gap-2 text-base px-8 border-border hover:bg-white hover:text-black"
+            className="group gap-2 text-base px-8 border-border hover:bg-white hover:text-black"
           >
             <Link
               href="https://github.com/fecarrico/A11Y.md/archive/refs/heads/main.zip"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
               {t("hero.cta.download")}
             </Link>
           </Button>
