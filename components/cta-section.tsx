@@ -50,14 +50,14 @@ export function CTASection() {
               asChild
               variant="outline"
               size="lg"
-              className="gap-2 text-base px-8 border-border hover:bg-card"
+              className="group gap-2 text-base px-8 border-border hover:bg-white hover:text-black"
             >
               <Link
                 href="https://github.com/fecarrico/A11Y.md/archive/refs/heads/main.zip"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Download className="w-4 h-4" />
+                <Download className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
                 {t("cta.download")}
               </Link>
             </Button>
@@ -66,7 +66,7 @@ export function CTASection() {
               asChild
               variant="ghost"
               size="lg"
-              className="gap-2 text-base px-8 hover:bg-card"
+              className="group gap-2 text-base px-8 hover:bg-transparent hover:text-foreground"
             >
               <Link
                 href="https://brasil.uxdesign.cc/a11y-md-acessibilidade-antes-de-qualquer-prompt-5c8778ccb310"
@@ -74,7 +74,7 @@ export function CTASection() {
                 rel="noopener noreferrer"
               >
                 {t("cta.article")}
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
