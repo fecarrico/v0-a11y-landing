@@ -66,7 +66,7 @@ export function CTASection() {
               asChild
               variant="ghost"
               size="lg"
-              className="group gap-2 text-base px-8 hover:bg-transparent"
+              className="group gap-2 text-base px-8 hover:bg-transparent hover:text-foreground"
             >
               <Link
                 href="https://brasil.uxdesign.cc/a11y-md-acessibilidade-antes-de-qualquer-prompt-5c8778ccb310"
