@@ -55,7 +55,7 @@ export function CodeComparison() {
   ]
 
   return (
-    <section className="py-24 px-4 relative">
+    <section aria-labelledby="code-heading" className="py-24 px-4 relative">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -65,7 +65,7 @@ export function CodeComparison() {
           className="text-center mb-16"
         >
           <span className="text-primary font-mono text-sm mb-4 block">{t("code.label")}</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 id="code-heading" className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             {t("code.heading")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -99,12 +99,7 @@ export function CodeComparison() {
                     <X className="w-4 h-4 text-destructive" aria-hidden="true" />
                     <span className="text-sm font-medium text-destructive">{t("code.without")}</span>
                   </div>
-                  <pre
-                    className="p-4 overflow-x-auto"
-                    tabIndex={0}
-                    role="region"
-                    aria-label={`${t("code.without")}: ${comparison.title}`}
-                  >
+                  <pre className="p-4 whitespace-pre-wrap break-words">
                     <code className="text-sm font-mono text-muted-foreground">{comparison.bad}</code>
                   </pre>
                 </div>
@@ -115,12 +110,7 @@ export function CodeComparison() {
                     <Check className="w-4 h-4 text-green-500" aria-hidden="true" />
                     <span className="text-sm font-medium text-green-500">{t("code.with")}</span>
                   </div>
-                  <pre
-                    className="p-4 overflow-x-auto"
-                    tabIndex={0}
-                    role="region"
-                    aria-label={`${t("code.with")}: ${comparison.title}`}
-                  >
+                  <pre className="p-4 whitespace-pre-wrap break-words">
                     <code className="text-sm font-mono text-foreground">{comparison.good}</code>
                   </pre>
                 </div>
