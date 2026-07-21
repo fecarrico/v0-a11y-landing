@@ -20,7 +20,7 @@ Relatório de conformidade da própria landing do projeto, construída sob o pad
 
 ## 1. Verificação técnica (automatizada e semântica)
 
-- [x] **Axe-Core:** **zero violações** em `/pt-BR` e `/en`, com as tags `wcag2a`, `wcag2aa`, **`wcag2aaa`**, `wcag21a`, `wcag21aa`, `wcag22aa` e `best-practice`
+- [x] **Axe-Core:** **zero violações** em `/pt-BR` e `/en`, com as tags `wcag2a`, `wcag2aa`, **`wcag2aaa`**, `wcag21a`, `wcag21aa`, `wcag22aa` e `best-practice` — mais a regra experimental `label-content-name-mismatch` (SC 2.5.3), habilitada depois que o verificador da Vercel pegou um `aria-label` substituindo o texto visível no seletor de idioma (corrigido: o nome acessível agora contém o "EN"/"PT" visível)
 - [x] **Linter:** `eslint-plugin-jsx-a11y` no modo `recommended` com cinco regras elevadas a `error` — sem avisos. A regra `no-noninteractive-tabindex` foi **configurada** para aceitar `role="region"`, não desligada: região rolável precisa ser focável, e é o próprio axe que exige isso
 - [x] **Semântica HTML:** nenhum `div` clicável. Todo elemento interativo é `<a>` ou `<button>` nativo
 - [x] **Hierarquia de títulos:** 18 títulos, **um único H1**, **zero pulos de nível**

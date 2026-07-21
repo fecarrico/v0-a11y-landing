@@ -20,7 +20,7 @@ Conformance report for the project's own landing page, built under the standard 
 
 ## 1. Technical verification (automated & semantics)
 
-- [x] **Axe-Core:** **zero violations** on `/pt-BR` and `/en`, with the `wcag2a`, `wcag2aa`, **`wcag2aaa`**, `wcag21a`, `wcag21aa`, `wcag22aa` and `best-practice` tags
+- [x] **Axe-Core:** **zero violations** on `/pt-BR` and `/en`, with the `wcag2a`, `wcag2aa`, **`wcag2aaa`**, `wcag21a`, `wcag21aa`, `wcag22aa` and `best-practice` tags — plus the experimental `label-content-name-mismatch` rule (SC 2.5.3), enabled after Vercel's checker caught an `aria-label` replacing the visible text on the language switcher (fixed: the accessible name now contains the visible "EN"/"PT")
 - [x] **Linter:** `eslint-plugin-jsx-a11y` on `recommended` with five rules raised to `error` — no warnings. The `no-noninteractive-tabindex` rule was **configured** to accept `role="region"`, not disabled: a scrollable region must be focusable, and axe itself requires it
 - [x] **HTML semantics:** no clickable `div`s. Every interactive element is a native `<a>` or `<button>`
 - [x] **Heading hierarchy:** 18 headings, **a single H1**, **zero level skips**
