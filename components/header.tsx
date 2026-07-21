@@ -85,17 +85,20 @@ export function Header({ dict, lang, otherLang }: HeaderProps) {
               </a>
             ))}
 
-            {/* i18n por rota: trocar de idioma é navegar, não mudar estado. */}
+            {/* i18n por rota: trocar de idioma é navegar, não mudar estado.
+                A11Y (SC 2.5.3, Label in Name): o nome acessível CONTÉM o texto
+                visível ("EN — Mudar para inglês") em vez de substituí-lo por
+                aria-label — controle por voz aciona por "EN". */}
             <Link
               href={`/${otherLang}`}
               hrefLang={otherLang}
-              aria-label={dict.nav.aria.switchLanguage}
               className={cn(
                 target,
                 "rounded-md border border-border px-3 font-mono text-sm text-muted-foreground hover:border-primary/60 hover:text-foreground",
               )}
             >
               {otherLang === "en" ? "EN" : "PT"}
+              <span className="sr-only"> — {dict.nav.aria.switchLanguage}</span>
             </Link>
 
             <a
@@ -117,13 +120,13 @@ export function Header({ dict, lang, otherLang }: HeaderProps) {
             <Link
               href={`/${otherLang}`}
               hrefLang={otherLang}
-              aria-label={dict.nav.aria.switchLanguage}
               className={cn(
                 target,
                 "rounded-md border border-border px-3 font-mono text-sm text-muted-foreground",
               )}
             >
               {otherLang === "en" ? "EN" : "PT"}
+              <span className="sr-only"> — {dict.nav.aria.switchLanguage}</span>
             </Link>
             <button
               ref={menuButtonRef}
