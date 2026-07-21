@@ -27,6 +27,8 @@ Indexado por **padrão**, nunca por tela. Antes de construir qualquer componente
 
 - **Aviso de nova aba** → componente único `ExternalLink`, que põe o aviso no nome acessível (`sr-only`) e marca o ícone como decorativo (G201). Não existe segundo jeito de abrir link externo nesta base. *(2026-07-20)*
 
+- **Nome acessível contém o texto visível (SC 2.5.3, Label in Name)** → em elemento com texto visível, nunca usar `aria-label` que o substitua — complementar com sufixo `sr-only` ("EN — Mudar para inglês"), para que controle por voz acione pelo rótulo que se vê. Pego pelo verificador da Vercel no seletor de idioma: a regra do axe (`label-content-name-mismatch`) é experimental e nossa auditoria não a rodava — agora roda. *(2026-07-20, achado do preview da Vercel)*
+
 - **Estado semântico** (erro, sucesso, alerta) → sempre ícone + texto + cor, nunca cor sozinha. Vale para os rótulos "Sem A11Y.md" / "Com A11Y.md" e para a confirmação de cópia. *(2026-07-20)*
 
 - **Confirmação de ação sem mudança de rota** (copiar a regra) → troca de ícone e rótulo no botão **mais** `role="status"` com o mesmo texto, mantido por 5s. Um segundo — o valor anterior no projeto — não sobrevive a uma fila de fala ocupada. *(2026-07-20)*
