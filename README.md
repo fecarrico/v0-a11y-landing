@@ -4,7 +4,7 @@
 
 Site oficial do [Projeto A11Y.md](https://github.com/fecarrico/A11Y.md) — o arquivo que ensina a IA a construir interfaces acessíveis desde a primeira linha, seguindo o padrão internacional WCAG 2.2.
 
-**No ar:** https://v0-projecta11y.vercel.app
+**No ar:** https://fecarrico.github.io/a11ymd/
 
 *Projeto independente e open source, apoiado pelo programa Claude for Open Source — não é um produto oficial da Anthropic.*
 
@@ -32,6 +32,7 @@ De quebra, o processo encontrou lacunas do próprio padrão — por exemplo, o S
 ## Stack
 
 - **Next.js 15** (App Router) — Server Components por padrão; poucas ilhas de cliente (cabeçalho, intro do nome, botão de copiar)
+- **Export estático** (`output: export`) publicado no **GitHub Pages** por um workflow do Actions; a página segue pré-renderizada em HTML no build (o ganho de conteúdo-no-HTML é preservado)
 - **Tailwind CSS 3** com a escala tipográfica cortada em 14px, o piso do Shield
 - **TypeScript strict**, sem `ignoreBuildErrors`
 - **ESLint** com `eslint-plugin-jsx-a11y` — incluindo a regra experimental `label-content-name-mismatch`
@@ -59,12 +60,14 @@ content/
   evidence.ts       # dados de campo — o tipo exige fonte e URL
   mentions.ts       # menções públicas — o tipo exige fonte e URL
 components/         # seções (Server Components) + as ilhas de cliente
-middleware.ts       # negocia o idioma na raiz pelo Accept-Language
+content/site.ts     # BASE_PATH + SITE_URL num lugar só (subcaminho do Pages)
+public/index.html   # redirect estático da raiz para /pt-BR ou /en
+.github/workflows/  # deploy.yml: build do export + publicação no Pages
 ```
 
 ### Duas decisões que explicam o resto
 
-**O idioma é rota, não estado.** A primeira versão guardava o idioma em `useState` e devolvia `null` até montar no cliente: o HTML servido saía com `<body>` vazio. Agora `/pt-BR` e `/en` são páginas pré-renderizadas, com `hreflang` e `<html lang>` corretos no primeiro byte.
+**O idioma é rota, não estado.** A primeira versão guardava o idioma em `useState` e devolvia `null` até montar no cliente: o HTML servido saía com `<body>` vazio. Agora `/pt-BR` e `/en` são páginas pré-renderizadas, com `hreflang` e `<html lang>` corretos no primeiro byte. Como o GitHub Pages é estático (não roda middleware), a raiz `/` usa um redirect no cliente com fallback `<meta refresh>` para pt-BR — as páginas de idioma em si continuam 100% estáticas.
 
 **Fonte é obrigação de tipo.** `Evidence` e `Mention` exigem `url`. Uma afirmação numérica ou uma citação sem link **não compila** — a diretriz de sustentar o discurso em evidência citada vira restrição do compilador, não disciplina de quem edita.
 

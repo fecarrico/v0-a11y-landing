@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A11Y.md</title>
+    <!--
+      Redirecionamento da raiz. O middleware que negociava idioma pelo
+      Accept-Language não roda no GitHub Pages (host estático), então esta
+      página estática assume o papel: sem JavaScript, o meta refresh manda para
+      pt-BR (idioma padrão); com JavaScript, o script escolhe pelo navegador.
+      Os links são relativos (./pt-BR/), então funcionam sob o subcaminho.
+    -->
+    <meta http-equiv="refresh" content="0; url=./pt-BR/" />
+    <link rel="canonical" href="./pt-BR/" />
+    <script>
+      var lang = (navigator.language || "pt").toLowerCase()
+      location.replace(lang.indexOf("en") === 0 ? "./en/" : "./pt-BR/")
+    </script>
+    <style>
+      html {
+        background: hsl(0 0% 7%);
+        color: hsl(0 0% 65%);
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      body {
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+      }
+      a {
+        color: hsl(14 60% 72%);
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Redirecionando… / Redirecting…
+      <a href="./pt-BR/">Português</a> · <a href="./en/">English</a>
+    </p>
+  </body>
+</html>

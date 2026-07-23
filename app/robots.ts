@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next"
+import { SITE_URL } from "@/content/site"
 
-const SITE_URL = "https://v0-projecta11y.vercel.app"
+// Necessário com output: export — gera o robots.txt estático no build.
+export const dynamic = "force-static"
 
 export default function robots(): MetadataRoute.Robots {
   return {

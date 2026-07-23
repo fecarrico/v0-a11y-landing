@@ -4,7 +4,7 @@
 
 Official website of the [A11Y.md Project](https://github.com/fecarrico/A11Y.md) — the file that teaches AI to build accessible interfaces from the very first line, following the international WCAG 2.2 standard.
 
-**Live:** https://v0-projecta11y.vercel.app
+**Live:** https://fecarrico.github.io/a11ymd/
 
 *An independent open source project, backed by the Claude for Open Source program — not an official Anthropic product.*
 
@@ -32,6 +32,7 @@ As a bonus, the process surfaced gaps in the standard itself — for instance SC
 ## Stack
 
 - **Next.js 15** (App Router) — Server Components by default; a few client islands (header, brand intro, copy button)
+- **Static export** (`output: export`) published to **GitHub Pages** by an Actions workflow; pages stay prerendered to HTML at build time (the content-in-HTML win is preserved)
 - **Tailwind CSS 3** with the type scale cut at 14px, the Shield floor
 - **Strict TypeScript**, no `ignoreBuildErrors`
 - **ESLint** with `eslint-plugin-jsx-a11y` — including the experimental `label-content-name-mismatch` rule
@@ -59,12 +60,14 @@ content/
   evidence.ts       # field data — the type requires a source and URL
   mentions.ts       # public mentions — the type requires a source and URL
 components/         # sections (Server Components) + the client islands
-middleware.ts       # negotiates the language at the root via Accept-Language
+content/site.ts     # BASE_PATH + SITE_URL in one place (Pages subpath)
+public/index.html   # static root redirect to /pt-BR or /en
+.github/workflows/  # deploy.yml: build the export + publish to Pages
 ```
 
 ### Two decisions that explain the rest
 
-**Language is a route, not state.** The first version kept the language in `useState` and returned `null` until mounting on the client: the served HTML shipped an empty `<body>`. Now `/pt-BR` and `/en` are prerendered pages, with correct `hreflang` and `<html lang>` from the first byte.
+**Language is a route, not state.** The first version kept the language in `useState` and returned `null` until mounting on the client: the served HTML shipped an empty `<body>`. Now `/pt-BR` and `/en` are prerendered pages, with correct `hreflang` and `<html lang>` from the first byte. Since GitHub Pages is static (no middleware), the root `/` uses a client-side redirect with a `<meta refresh>` fallback to pt-BR — the locale pages themselves stay 100% static.
 
 **Sources are a type requirement.** `Evidence` and `Mention` require a `url`. A numeric claim or a quote without a link **does not compile** — the guideline of grounding the message in cited evidence becomes a compiler constraint, not editorial discipline.
 
